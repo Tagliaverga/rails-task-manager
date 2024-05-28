@@ -1,0 +1,20 @@
+<h1 class="h1 d-flex align-itens-center">Tasks<h1><br>
+
+<ul>
+<% @tasks.each do |task| %>
+  <li class="h3 card d-flex flex-row m-3 justify-content-center align-itens-center">
+    <% if task.completed == true %>
+      <i class="fa-regular fa-square-check"></i>
+    <% elsif task.completed == false  %>
+      <i class="fa-regular fa-square"></i>
+    <%end%>
+    <%= link_to task.title, task_path(task) %>
+    <%= link_to destroy_task_path(task.id),
+      data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do
+   %>
+      <i class="px-3 fa-solid fa-trash"></i>
+    <% end %>
+  </li>
+<% end %>
+</ul>
+<%= link_to "Create a new task", new_task_path, class:"btn btn-primary btn-lg" %>
